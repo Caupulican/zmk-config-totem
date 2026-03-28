@@ -12,6 +12,7 @@
        
 
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/behaviors.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -41,7 +42,7 @@
             combo_func {
                 timeout-ms = <80>;
                 key-positions = <33 35>;
-                bindings = <&to FUNC>;
+                bindings = <&tog FUNC>;
             };
     };
 
@@ -59,6 +60,18 @@
         };
     };
 
+    behaviors {
+        th: tap_hold_key {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <170>;
+            quick-tap-ms = <100>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap-Hold Key";
+        };
+    };
+
         keymap {
                 compatible = "zmk,keymap";
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -68,20 +81,20 @@
 label= "BASE"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃     Q     ┃     W     ┃     E     ┃     R     ┃     T     ┃   ┃     Y     ┃     U     ┃     I     ┃     O     ┃     P     ┃
+//             ┃     Q     ┃     W     ┃  E / ESC  ┃     R     ┃     T     ┃   ┃ Y / COPY  ┃     U     ┃     I     ┃     O     ┃ P / PASTE ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     A     ┃     S     ┃     D     ┃     F     ┃     G     ┃   ┃     H     ┃     J     ┃     K     ┃     L     ┃     ;     ┃
+//             ┃     A     ┃     S     ┃     D     ┃     F     ┃  G / \    ┃   ┃  H / /    ┃     J     ┃     K     ┃ L / C-F12 ┃  ~ / ^    ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃    GUI    ┃     Z     ┃  X / NUM  ┃     C     ┃     V     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃     /     ┃    GUI    ┃
+// ┃    GUI    ┃     Z     ┃  X / NUM  ┃  C / Ç    ┃  V / !    ┃     B     ┃   ┃     N     ┃     M     ┃  , / ?    ┃     .     ┃     /     ┃    GUI    ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃    DEL    ┃ TAB/CTRL  ┃ ENTER/SYM ┃   ┃ BSPC/SHFT ┃ SPACE/NAV ┃    ESC    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-                &kp A       &kp S       &kp D       &kp F       &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI
-    &kp LGUI    &kp Z       &lt NUM X   &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp RGUI
+                &kp Q       &kp W       &th ESC E   &kp R       &kp T              &th LC(C) Y &kp U       &kp I       &kp O          &th LC(V) P
+                &kp A       &kp S       &kp D       &kp F       &th NUBS G         &th INT1 H  &kp J       &kp K       &th RC(F12) L  &th LS(SQT) SQT
+    &kp LGUI    &kp Z       &lt NUM X   &th SEMI C  &th EXCL V   &kp B              &kp N       &kp M       &th LS(INT1) COMMA &kp DOT  &kp FSLH    &kp RGUI
                                         &kp DEL   &mt LCTRL TAB &lt SYM RET    &mt RSHFT BSPC &lt NAV SPACE &kp ESC
                         >;
                 };
@@ -131,9 +144,9 @@ label= "SYM"                               ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp ESC     &kp DLLR    &kp AT      &kp AMPS    &kp PIPE        &kp ASTRK   &kp LBKT    &kp RBKT    &kp LBRC    &kp RBRC       
-                &trans      &kp MINUS   &kp UNDER   &kp LPAR    &kp DQT         &kp RPAR    &kp SQT     &kp COLON   &kp EQUAL   &kp SEMI
-    &trans      &kp HASH    &kp BSLH    &kp FSLH    &kp LT      &kp GT          &trans      &trans      &kp CARET   &kp TILDE   &kp QMARK   &trans         
+                &kp ESC     &kp DLLR    &kp AT      &kp AMPS    &kp LS(NUBS)    &kp ASTRK   &kp RBKT    &kp BSLH    &kp LS(RBKT) &kp LS(BSLH)
+                &trans      &kp MINUS   &kp UNDER   &kp LPAR    &kp LS(GRAVE)   &kp RPAR    &kp GRAVE   &kp LS(FSLH) &kp EQUAL  &kp FSLH
+    &trans      &kp HASH    &kp NUBS    &kp INT1    &kp LT      &kp GT          &trans      &trans      &kp LS(SQT) &kp SQT     &kp LS(INT1) &trans         
                                         &trans      &trans      &trans          &mo ADJ     &trans      &trans      
                         >;
                 };
@@ -202,7 +215,7 @@ label= "FUNC"                              ;
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃           ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃           ┃           ┃    BASE   ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
+//                                     ┃           ┃  FUNC TOG ┃           ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
@@ -210,7 +223,7 @@ label= "FUNC"                              ;
                 &kp F1      &kp F2      &kp F3      &kp F4      &kp F5          &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
                 &kp LC(F2)  &kp LC(F7)  &kp LC(F12) &kp LS(F9)  &kp LS(F11)     &trans      &kp F11     &kp F12     &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &to BASE
-                                        &trans      &trans      &trans          &trans      &trans      &trans      
+                                        &trans      &tog FUNC   &trans          &trans      &trans      &trans      
                         >;
                 };
         };
